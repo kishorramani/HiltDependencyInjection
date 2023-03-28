@@ -16,7 +16,8 @@ class MainFragment : Fragment() {
     @Inject
     lateinit var userRepository: UserRepository
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         userRepository.saveUser("kishorramani070193@gmail.com", "Kishor@123")
 

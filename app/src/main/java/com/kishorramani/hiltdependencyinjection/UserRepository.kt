@@ -1,14 +1,22 @@
 package com.kishorramani.hiltdependencyinjection
 
-import com.kishorramani.hiltdependencyinjection.services.LoggerService
+import android.util.Log
 import javax.inject.Inject
 
 private const val TAG = "Ki- UserRepository"
 
-class UserRepository @Inject constructor(private val loggerService: LoggerService) {
+interface UserRepository {
+    fun saveUser(email: String, password: String)
+}
 
-    fun saveUser(email: String, password: String) {
-        //Log.e(TAG, "saveUser: User saved in DB")
-        loggerService.log(TAG, "User saved in DB")
+class SQLRepository @Inject constructor() : UserRepository {
+    override fun saveUser(email: String, password: String) {
+        Log.e(TAG, "saveUser: User saved in SQL DB")
+    }
+}
+
+class FirebaseRepository : UserRepository {
+    override fun saveUser(email: String, password: String) {
+        Log.e(TAG, "saveUser: User saved in Firebase DB")
     }
 }
