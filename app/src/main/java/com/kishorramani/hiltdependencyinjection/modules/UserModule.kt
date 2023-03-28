@@ -1,22 +1,37 @@
 package com.kishorramani.hiltdependencyinjection.modules
 
 import com.kishorramani.hiltdependencyinjection.FirebaseRepository
+import com.kishorramani.hiltdependencyinjection.SQLRepository
 import com.kishorramani.hiltdependencyinjection.UserRepository
+import com.kishorramani.hiltdependencyinjection.qualifier.FirebaseQualifier
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.FragmentComponent
-import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 
-//@InstallIn(FragmentComponent::class)
-//@InstallIn(SingletonComponent::class)
+/*@InstallIn(ActivityComponent::class)
+@Module
+abstract class UserModule {
+    @Binds
+    abstract fun bindUserRepository(sqlRepository: SQLRepository): UserRepository
+}*/
+
+
 @InstallIn(ActivityComponent::class)
 @Module
 class UserModule {
 
     @Provides
-    fun provideUserRepository() : UserRepository {
+    @Named("sql")
+    fun provideUserRepository(sqlRepository: SQLRepository) : UserRepository {
+        return sqlRepository
+    }
+
+    @Provides
+    @FirebaseQualifier
+    fun provideFirebaseRepository() : UserRepository {
         return FirebaseRepository()
     }
 

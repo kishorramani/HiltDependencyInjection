@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.kishorramani.hiltdependencyinjection.R
 import com.kishorramani.hiltdependencyinjection.UserRepository
+import com.kishorramani.hiltdependencyinjection.qualifier.FirebaseQualifier
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
     @Inject
+    @FirebaseQualifier
     lateinit var userRepository: UserRepository
 
     override fun onCreateView(
